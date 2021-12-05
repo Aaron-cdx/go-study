@@ -20,17 +20,17 @@ conn是两边的共同连接
 然后进行操作再写回来
 这边接收到之后，通过conn和os.Stdout的情况，在重新打印在控制台
 */
-func main() {
-	conn, err := net.Dial("tcp", "localhost:8000")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer conn.Close()
-	//go sendContent(conn)
-	go mustCopy(os.Stdout, conn)
-	mustCopy(conn, os.Stdin)
-}
+//func main() {
+//	conn, err := net.Dial("tcp", "localhost:8000")
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	defer conn.Close()
+//	//go sendContent(conn)
+//	go mustCopy(os.Stdout, conn)
+//	mustCopy(conn, os.Stdin)
+//}
 
 func sendContent(conn net.Conn) {
 	defer conn.Close()

@@ -18,11 +18,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	done := make(chan struct{})
+	done := make(chan struct{}) // 这里是因为done在这里，所以可以维持通信下去
 	go func() {
 		io.Copy(os.Stdout, conn) // ignoring errors
-		log.Println("done")
-		done <- struct{}{} // signal the main goroutine
+		log.Println("done")      // 一旦done被放入元素，则整体结束
+		done <- struct{}{}       // signal the main goroutine
 	}()
 	mustCopy(conn, os.Stdin)
 	conn.Close()                    // 这是关闭了读写
